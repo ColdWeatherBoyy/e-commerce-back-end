@@ -42,8 +42,8 @@ router.post("/", async (req, res) => {
 	// create a new category
 	try {
 		// validate for appropriate request
-		if (!req.body.id) {
-			res.status.json(400).json({ error: "id is required" });
+		if (!req.body.category_name) {
+			res.status.json(400).json({ error: "category_name is required" });
 		} else {
 			// INSERT new entry
 			const newCategory = await Category.create({
@@ -63,22 +63,20 @@ router.put("/:id", async (req, res) => {
 
 		// if no categoryData, 404 error
 		if (!categoryData) {
-			res.status(404).json({ message: "There's no category with that id!" });
-		} else {
-			const { category_name } = req.body;
-
-			// if category_name exists after destructuring, continue
-			if (category_name) {
-				// set new name (UPDATE)
-				categoryData.set({
-					name: category_name,
-				});
-
-				res.status(200).json(categoryData);
-			} else {
-				res.status(400).json({ message: "Must include a category name!" });
-			}
+			return res.status(404).json({ message: "There's no category with that id!" });
 		}
+
+		const { category_name } = req.body;
+
+		// if no category_name provided, 400 error
+		if (!category_name) {
+			return res.status(400).json({ message: "Must include a category name!" });
+		}
+
+		// update if all good to go
+		await categoryData.update({ name: category_name });
+
+		res.status(200).json(categoryData);
 	} catch (err) {
 		res.status(500).json(err);
 	}
