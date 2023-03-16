@@ -39,13 +39,15 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
 	// create a new tag
 	try {
+		const { tag_name } = req.body;
+
 		// validate for appropriate request
-		if (!req.body.tag_name) {
+		if (!tag_name) {
 			res.status.json(400).json({ error: "tag_name is required" });
 		} else {
 			// INSERT new entry
 			const newTag = await Tag.create({
-				id: req.body.id,
+				tag_name,
 			});
 			res.status(200).json(newTag);
 		}
@@ -72,7 +74,7 @@ router.put("/:id", async (req, res) => {
 		}
 
 		// update if all good to go
-		await tagData.update({ name: tag_name });
+		await tagData.update({ tag_name });
 
 		res.status(200).json(tagData);
 	} catch (err) {

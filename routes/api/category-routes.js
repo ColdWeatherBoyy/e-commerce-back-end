@@ -76,7 +76,7 @@ router.put("/:id", async (req, res) => {
 		}
 
 		// update if all good to go
-		await categoryData.update({ name: category_name });
+		await categoryData.update({ category_name });
 
 		res.status(200).json(categoryData);
 	} catch (err) {
