@@ -2,6 +2,8 @@
 
 ## Description
 
+Video Walkthrough can be found [here](https://drive.google.com/file/d/1uP2lwOTKsrqfTiJyUxz-qUUBk-Ewfcd2/view).
+
 This application demonstrates a functional back end to an ecommerce site that allowed me practice with Sequelize and MySQL (and continued practice with Express) to manipulate a relational database with primary/foreign key relationships. Though not hooked up to a front end yet, it can be tested with an application like Insomnia, that allows testing of multiple routes. It was a great way to see a practical purpose for new skills being developed.
 
 ## Installation
